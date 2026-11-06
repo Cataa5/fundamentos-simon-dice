@@ -11,15 +11,17 @@ class VistaSimonDice:
         self.accion_volver_menu = accion_volver_menu
         
         self.master.geometry("1000x700")
+
+        self.elementos_cartel = []
         
         # ------------- Cargar Imágenes -------------------
         self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondo.png")
-        self.img_perdio = tk.PhotoImage(file="assets/imagenes/perdio.png")
         self.img_acierto = tk.PhotoImage(file="assets/imagenes/acerto.png")
         self.img_derrota = tk.PhotoImage(file="assets/imagenes/perdiste.png")
         self.img_ganada = tk.PhotoImage(file="assets/imagenes/ganaste.png")
         self.frames_espera = [tk.PhotoImage(file="assets/imagenes/base.png"), tk.PhotoImage(file="assets/imagenes/espera1.png"), tk.PhotoImage(file="assets/imagenes/espera2.png"), tk.PhotoImage(file="assets/imagenes/espera3.png"), tk.PhotoImage(file="assets/imagenes/bostezo1.png"), tk.PhotoImage(file="assets/imagenes/bostezo2.png")]
         self.frames_gano = [tk.PhotoImage(file="assets/imagenes/gano1.png"), tk.PhotoImage(file="assets/imagenes/gano2.png"), tk.PhotoImage(file="assets/imagenes/gano3.png"), tk.PhotoImage(file="assets/imagenes/gano4.png"), tk.PhotoImage(file="assets/imagenes/gano5.png"), tk.PhotoImage(file="assets/imagenes/gano6.png"), tk.PhotoImage(file="assets/imagenes/gano7.png"), tk.PhotoImage(file="assets/imagenes/gano8.png")]
+        self.frames_perdio = [tk.PhotoImage(file="assets/imagenes/perdio1.png"), tk.PhotoImage(file="assets/imagenes/perdio2.png"), tk.PhotoImage(file="assets/imagenes/perdio1.png"), tk.PhotoImage(file="assets/imagenes/perdio3.png")]
         
         # ----------- Canvas y Capas ---------------
         self.canvas = tk.Canvas(self.master, width=1000, height=700, highlightthickness=0)
@@ -53,7 +55,7 @@ class VistaSimonDice:
         self.colores_luz = {'v': "#BC86D2", 'a': "#F4E197", 'n': "#F9CEA9", 'z': "#87C2E9"}
         
         # ----------- INICIALIZAR GESTORES EXTERNOS -----------
-        self.animacion = AnimacionPanda(self.master, self.canvas, self.panda_id, self.frames_espera, self.frames_gano, self.img_acierto, self.img_perdio)
+        self.animacion = AnimacionPanda(self.master, self.canvas, self.panda_id, self.frames_espera, self.frames_gano, self.img_acierto, self.frames_perdio)
         self.efectos = GestorConfeti(self.master, self.canvas)
         self.luces = GestorLuces(self.master, self.botones_map, self.colores_base, self.colores_luz, self.cambiar_estado_botones)
         
@@ -76,6 +78,7 @@ class VistaSimonDice:
     def mostrar_derrota(self):
         self.cambiar_estado_botones(tk.DISABLED)
         self.animacion.mostrar_derrota()
+        self.panel_madera.place_forget()
         self.canvas.itemconfig(self.filtro_rojo, state="normal")
         self.canvas.itemconfig(self.cartel_derrota_id, state="normal")
         self.master.after(1000, self.mostrar_menu_final)
@@ -83,6 +86,7 @@ class VistaSimonDice:
     def mostrar_victoria(self):
         self.cambiar_estado_botones(tk.DISABLED) 
         self.animacion.iniciar_victoria()
+        self.panel_madera.place_forget()
         self.canvas.itemconfig(self.cartel_ganada_id, state="normal")
         self.efectos.lanzar_confeti() 
         self.master.after(1000, self.mostrar_menu_final)
@@ -92,6 +96,7 @@ class VistaSimonDice:
         self.canvas.itemconfig(self.filtro_rojo, state="hidden")
         self.canvas.itemconfig(self.cartel_derrota_id, state="hidden")
         self.canvas.itemconfig(self.cartel_ganada_id, state="hidden")
+        self.panel_madera.place(relx=0.5, rely=0.85, anchor="center")
         self.cambiar_estado_botones(tk.NORMAL)
         self.animacion.iniciar_espera()
 
@@ -102,17 +107,17 @@ class VistaSimonDice:
     def mostrar_menu_final(self):
         self.btn_jugar_de_nuevo = tk.Button(
             self.master, text="VOLVER A JUGAR", font=("Minecraft", 16, "bold"), 
-            bg="#C99559", fg="#464646", activebackground="#A87840", activeforeground="#464646", 
+            bg="#C99559", fg="#3A2212", activebackground="#A87840", activeforeground="#464646", 
             relief="raised", bd=4, command=self.reiniciar_partida
         )
         self.btn_jugar_de_nuevo.place(relx=0.5, rely=0.55, width=280, height=50, anchor="center")
 
         self.btn_volver_inicio = tk.Button(
             self.master, text="VOLVER AL INICIO", font=("Minecraft", 16, "bold"), 
-            bg="#C99559", fg="#464646", activebackground="#A87840", activeforeground="#464646", 
+            bg="#C99559", fg="#3A2212", activebackground="#A87840", activeforeground="#464646", 
             relief="raised", bd=4, command=self.volver_al_menu
         )
-        self.btn_volver_inicio.place(relx=0.5, rely=0.67, width=280, height=50, anchor="center")
+        self.btn_volver_inicio.place(relx=0.5, rely=0.66, width=280, height=50, anchor="center")
 
     def reiniciar_partida(self):
         self.btn_jugar_de_nuevo.destroy()

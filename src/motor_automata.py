@@ -1,22 +1,24 @@
 from automata.fa.dfa import DFA
 #fa: Finite Automata, dfa: Deterministic Finite Automata
 
-class AutomataSimonDice:
+class MaquinaMoore:
    
     def __init__(self):
         # Definimos el autómata con la librería
         self.dfa = DFA(
-            states={'q0', 'q1', 'q2', 'q_win', 'q_lose'}, # ESTADOS PRUEBA
+            states={'q0', 'q1', 'q2', 'q3','q4', 'q_win', 'q_lose'}, # ESTADOS PRUEBA
             input_symbols={'v', 'a', 'n', 'z'}, #ALFABETO: violeta, amarillo, naranja, azul
             transitions={ #transiciones
                 'q0': {'v': 'q1', 'a': 'q_lose', 'n': 'q_lose', 'z': 'q_lose'},
-                'q1': {'v': 'q_lose', 'a': 'q2', 'n': 'q_lose', 'z': 'q_lose'},
-                'q2': {'v': 'q_lose', 'a': 'q_lose', 'n': 'q_win', 'z': 'q_lose'},
+                'q1': {'v': 'q_lose', 'a': 'q_lose', 'n': 'q2', 'z': 'q_lose'},
+                'q2': {'v': 'q_lose', 'a': 'q3', 'n': 'q_lose', 'z': 'q_lose'},
+                'q3': {'v': 'q_lose', 'a': 'q4', 'n': 'q_lose', 'z': 'q_lose'},
+                'q4': {'v': 'q_lose', 'a': 'q_lose', 'n': 'q_lose', 'z': 'q_win'},
                 'q_win': {'v': 'q_win', 'a': 'q_win', 'n': 'q_win', 'z': 'q_win'},
                 'q_lose': {'v': 'q_lose', 'a': 'q_lose', 'n': 'q_lose', 'z': 'q_lose'}
             },
             initial_state='q0',
-            final_states={'q0','q1','q2','q_win','q_lose'}
+            final_states={'q0','q1','q2','q3','q4','q_win','q_lose'}
         )
         
         # ESTADOS/SALIDAS
@@ -24,6 +26,8 @@ class AutomataSimonDice:
             'q0': 'I',
             'q1': 'B',
             'q2': 'B',
+            'q3': 'B',
+            'q4': 'B',
             'q_win': 'G',
             'q_lose': 'P'
         }

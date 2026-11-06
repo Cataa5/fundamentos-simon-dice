@@ -8,18 +8,27 @@ class GestorLuces:
         self.colores_luz = colores_luz
         self.cambiar_estado = callback_estado_botones
 
-    def reproducir_secuencia(self, secuencia_objetivo, indice=0):
-        self.cambiar_estado(tk.DISABLED)
-        
-        if indice < len(secuencia_objetivo):
-            letra = secuencia_objetivo[indice]
-            boton = self.botones_map[letra]
-            boton.config(bg=self.colores_luz[letra])
-            self.master.after(400, lambda: self.apagar_boton(letra, secuencia_objetivo, indice))
-        else:
+    def reproducir_secuencia(self, secuencia, indice=0):
+        if indice == 0:
+            self.cambiar_estado(tk.DISABLED)
+
+        # Si se mostraron todas las luces, recién ahí desbloqueamos
+        if indice >= len(secuencia):
             self.cambiar_estado(tk.NORMAL)
-            
-    def apagar_boton(self, letra, secuencia_objetivo, indice):
+            return
+
+        letra = secuencia[indice]
         boton = self.botones_map[letra]
-        boton.config(bg=self.colores_base[letra])
-        self.master.after(200, lambda: self.reproducir_secuencia(secuencia_objetivo, indice + 1))
+
+        if boton.winfo_exists():
+            # Encender luz
+            boton.config(bg=self.colores_luz[letra])
+
+            # Apagar después de 400ms y pasar al siguiente
+            self.master.after(400, lambda: self.apagar_y_continuar(letra, secuencia, indice))
+            
+    def apagar_y_continuar(self, letra, secuencia, indice):
+        boton = self.botones_map[letra]
+        if boton.winfo_exists():
+            boton.config(bg=self.colores_base[letra])
+        self.master.after(200, lambda: self.reproducir_secuencia(secuencia, indice + 1))

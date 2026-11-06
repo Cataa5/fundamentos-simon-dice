@@ -30,10 +30,10 @@ class VistaInicioSimonDice:
             self.letras_id.append(id_texto)
             x_inicial += 18 
             
-        btn_jugar = tk.Button(self.master, text="JUGAR", font=("Minecraft", 16, "bold"), bg="#C99559", fg="#464646", activebackground="#A87840", activeforeground="#464646", relief="raised", bd=4, command=accion_jugar)
+        btn_jugar = tk.Button(self.master, text="JUGAR", font=("Minecraft", 16, "bold"), bg="#C99559", fg="#3A2212", activebackground="#A87840", activeforeground="#3A2212", relief="raised", bd=4, command=accion_jugar)
         btn_jugar.place(relx=0.52, rely=0.60, width=250, height=50, anchor="center")
 
-        btn_salir = tk.Button(self.master, text="SALIR", font=("Minecraft", 16, "bold"), bg="#C99559", fg="#464646", activebackground="#A87840", activeforeground="#464646", relief="raised", bd=4, command=accion_salir)
+        btn_salir = tk.Button(self.master, text="SALIR", font=("Minecraft", 16, "bold"), bg="#C99559", fg="#3A2212", activebackground="#A87840", activeforeground="#3A2212", relief="raised", bd=4, command=accion_salir)
         btn_salir.place(relx=0.52, rely=0.70, width=250, height=50, anchor="center")
 
         self.animar_luces()
@@ -60,7 +60,7 @@ class VistaInicioSimonDice:
             return
         
         colores = ["#8A2BE2", "#FFD700", "#FFA500", "#1E90FF"] 
-        color_base = "#544F48"
+        color_base = "#3A2212"
         
         for id_letra in self.letras_id:
             self.canvas.itemconfig(id_letra, fill=color_base)

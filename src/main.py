@@ -1,5 +1,5 @@
 import tkinter as tk
-from motor_automata import AutomataSimonDice
+from motor_automata import MaquinaMoore
 from interfazInicio import VistaInicioSimonDice
 from interfazPartida import VistaSimonDice
 
@@ -7,11 +7,10 @@ class ControladorSimonDice:
     def __init__(self):
         self.ventana = tk.Tk()
         self.ventana.title("Simón Dice - Autómatas")
-        self.motor = AutomataSimonDice()
-        
+        self.motor = MaquinaMoore()
         self.secuencia_actual = ""
         self.estado_juego = "ESPERANDO"
-        self.secuencia_maestra = "van" # Secuencia PRUEBA 
+        self.secuencia_maestra = "vnaaz" # Secuencia PRUEBA 
         
         self.mostrar_menu()
 
@@ -34,7 +33,7 @@ class ControladorSimonDice:
         self.secuencia_actual = ""
         self.estado_juego = "ESPERANDO"
         
-        self.ventana.after(1000, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
+        self.ventana.after(300, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
 
     def procesar_color(self, color):
         if self.estado_juego in ["G", "P"]:
