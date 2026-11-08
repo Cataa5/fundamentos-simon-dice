@@ -2,6 +2,7 @@ import tkinter as tk
 from motor_automata import MaquinaMoore
 from interfazInicio import VistaInicioSimonDice
 from interfazPartida import VistaSimonDice
+from validadorBnf import BnfSecuenciaParser
 
 class ControladorSimonDice:
     def __init__(self):
@@ -39,6 +40,12 @@ class ControladorSimonDice:
         if self.estado_juego in ["G", "P"]:
             self.reiniciar_juego()
             return
+
+        #BNF 
+        validador_bnf = BnfSecuenciaParser(color)
+        if not validador_bnf.validar():
+            print(f"Error sintáctico (BNF): El símbolo '{color}' no es válido.")
+            return # Rechaza la entrada si no cumple la gramática
 
         self.secuencia_actual += color
         resultado = self.motor.evaluar_secuencia(self.secuencia_actual)
