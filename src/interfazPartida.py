@@ -4,18 +4,23 @@ from efectos import GestorConfeti
 from secuenciaLuces import GestorLuces
 
 class VistaSimonDice:
-    def __init__(self, master, accion_boton, accion_reiniciar, accion_volver_menu):
+    def __init__(self, master, accion_boton, accion_reiniciar, accion_volver_menu, modo="NORMAL"):
         self.master = master
         self.accion_boton = accion_boton 
         self.accion_reiniciar = accion_reiniciar
         self.accion_volver_menu = accion_volver_menu
+        self.modo = modo
         
         self.master.geometry("1000x700")
 
         self.elementos_cartel = []
         
         # ------------- Cargar Imágenes -------------------
-        self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondo.png")
+        if self.modo == "REVERSO":
+            self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondoReverso2.png") 
+        else:
+            self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondo.png")
+
         self.img_acierto = tk.PhotoImage(file="assets/imagenes/acerto.png")
         self.img_derrota = tk.PhotoImage(file="assets/imagenes/perdiste.png")
         self.img_ganada = tk.PhotoImage(file="assets/imagenes/ganaste.png")
