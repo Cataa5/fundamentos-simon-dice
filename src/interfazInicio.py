@@ -6,7 +6,7 @@ class VistaInicioSimonDice:
         self.master = master
         self.master.geometry("1000x700")
 
-        self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondoInicio2.png")
+        self.img_fondo = tk.PhotoImage(file="assets/imagenes/fondoInicio.png")
         self.canvas = tk.Canvas(self.master, width=1000, height=700, highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, image=self.img_fondo, anchor="nw")
