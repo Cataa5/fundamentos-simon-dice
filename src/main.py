@@ -10,7 +10,7 @@ class ControladorSimonDice:
         self.motor = MaquinaTuring()
         self.secuencia_actual = ""
         self.estado_juego = "ESPERANDO"
-        self.secuencia_maestra = "zznaa" # Secuencia PRUEBA 
+        self.secuencia_maestra = "vvnaz" # Secuencia PRUEBA 
         
         self.mostrar_menu()
 
