@@ -23,7 +23,7 @@ class VistaInicioSimonDice:
         
         palabra = "SECUENCIA DE LUCES"
         self.letras_id = []
-        x_inicial = 370 
+        x_inicial = 355 
 
         for letra in palabra:
             id_texto = self.canvas.create_text(x_inicial, 260, text=letra, font=("Minecraft", 14, "bold"), fill="#F4E8C1")

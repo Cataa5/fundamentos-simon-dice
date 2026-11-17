@@ -23,13 +23,12 @@ class AutomataPila:
         for s in simbolos_pila:
             transitions['q0']['#'][s] = ('q1', (s,))
             
-        # Estado q1: Desapila en orden LIFO
+        # Estado q1: Desapila 
         for c_in, c_stack in colores.items():
             transitions['q1'][c_in] = {
                 c_stack: ('q1', '')
             }
             
-        # Transición épsilon/lambda ('') en q1: al quedar fondo '#', pasa a q2
         transitions['q1'][''] = {
             '#': ('q2', ('#',))
         }
@@ -54,6 +53,6 @@ class AutomataPila:
         except Exception:
             return 'P'
 
-        if len(ultima_config.stack) == 1:   # pila vacía (solo queda '#') -> aceptó de verdad
+        if len(ultima_config.stack) == 1:   # pila vacía (solo queda '#')
             return 'G'
         return 'B'

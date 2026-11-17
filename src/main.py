@@ -16,7 +16,7 @@ class ControladorSimonDice:
 
         self.secuencia_actual = ""
         self.estado_juego = "ESPERANDO"
-       ## self.secuencia_maestra = "vnaaz" # Secuencia PRUEBA BnfGeneradorSecuencia reemplaza la generacion fija 
+        ## self.secuencia_maestra = "vnaaz" # Secuencia PRUEBA BnfGeneradorSecuencia reemplaza la generacion fija 
         
         # Instanciamos el generador basado en BNF
         self.generador_bnf = BnfGeneradorSecuencias()
@@ -79,7 +79,7 @@ class ControladorSimonDice:
         self.secuencia_maestra = self.generador_bnf.generar_secuencia(longitud=5)
         print(f"Nueva partida - Secuencia BNF: {self.secuencia_maestra}")
 
-        self.ventana.after(500, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
+        self.ventana.after(1200, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
 
         self.transicion_pestaneo(_cambiar)
 
@@ -90,7 +90,7 @@ class ControladorSimonDice:
             self.vista = VistaSimonDice(self.ventana, self.procesar_color, self.reiniciar_juego, self.mostrar_menu, modo="REVERSO")
             self.secuencia_actual = ""
             self.estado_juego = "ESPERANDO"
-            self.ventana.after(500, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
+            self.ventana.after(1200, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
 
         self.transicion_pestaneo(_cambiar)
 
@@ -127,7 +127,7 @@ class ControladorSimonDice:
         self.estado_juego = "ESPERANDO"
         self.vista.reiniciar_interfaz()
         
-        self.ventana.after(500, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
+        self.ventana.after(1200, lambda: self.vista.reproducir_secuencia(self.secuencia_maestra))
 
         # Generamos otra secuencia nueva al reiniciar
         self.secuencia_maestra = self.generador_bnf.generar_secuencia(longitud=5)
